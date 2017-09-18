@@ -13,40 +13,53 @@ let nav = document.getElementsByClassName("navBar");
  });
 
 
-////////////// FOR IMAGE LIST //////////////////// 
-let id =    ["img1", "img2", "img3", "img4", "img5"];
-let catId = ["cat1", "cat2", "cat3", "cat4", "cat5"];
-let divId = ["div1","div2","div3","div4","div5"];
-let listItem =  ["li1","li2","li3","li4","li5"];
-let clis = [0, 0, 0, 0, 0];
-let pics = [];
-let cats = [];
-let divs = [];
-let list = [];
+////////////// Model //////////////////// 
+
+let cats = [{
+     name : "cat1",
+     source : "images/cat1.png",
+     clicks : 0
+},{
+     name : "cat2",
+     source : "images/cat2.png",
+     clicks: 0
+},{
+     name : "cat3",
+     source : "images/cat3.png",
+     clicks: 0
+},{
+     name : "cat4",
+     source : "images/cat4.png",
+     clicks : 0
+},{
+     name : "cat5",
+     source : "images/cat5.png",
+     clicks: 0
+}]
+
+let buttons = ["b1","b2","b3","b4","b5"];
+
+/////////////view//////////////
+
+let catName = document.getElementById("name");
+let imageSource = document.getElementById("imgSrc");
+let counter = document.getElementById("counter");
+imageSource.style.display = 'none';
+
+////////////Octopus///////////
+
+for(let i = 0 ; i < buttons.length ; i++){
+ let curb = document.getElementById(buttons[i]);
+  curb.addEventListener('click',function(){
+    imageSource.style.display = 'block';
+    catName.innerHTML = cats[i].name;
+    counter.innerHTML = cats[i].clicks;
+    imageSource.src = cats[i].source;
+    imageSource.addEventListener('click',function(){
+       cats[i].clicks++;
+       counter.innerHTML = cats[i].clicks; 
+    })
+  });
+}
 
 
-for (let i = 0; i < 5; i++) {
-    pics[i] = document.getElementById(id[i]);
-    cats[i] = document.getElementById(catId[i]);
-    divs[i] = document.getElementById(divId[i]);
-    list[i] = document.getElementById(listItem[i]);
-    cats[i].innerHTML = clis[i];
-    divs[i].style.display = 'none';
-
-    pics[i].addEventListener('click', function() {
-        clis[i]++;
-        cats[i].innerHTML = clis[i];
-    }, false);
-
-    list[i].addEventListener('click', function() {
-      if(divs[i].style.display === 'none'){
-          divs[i].style.display = 'block';
-      }
-      else{
-      	divs[i].style.display = 'none';
-      }
-    }, false);
-
-} 
-
-console.log(list);
